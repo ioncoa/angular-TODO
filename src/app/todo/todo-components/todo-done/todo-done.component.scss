@@ -1,0 +1,23 @@
+
+.todo-list-item {
+
+    &__title{
+        font-weight: bold;
+        font-weight: bold;
+        margin: 10px;
+        margin-right: 20px;
+        
+    }
+    &__description {
+        text-decoration: dotted;
+    }
+}
+
+section {
+    width: 200px;
+
+}
+
+table {
+  width: 100%;
+}

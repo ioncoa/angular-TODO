@@ -1,0 +1,38 @@
+.todo-search{
+   display: flex;
+   flex-direction: row;
+   padding-top: 20px;
+   justify-content: center;
+}
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+
+  &-item {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 5px;
+
+    &__title {
+      font-weight: bold;
+      margin-right: 20px;
+
+      &.active {
+        color: blueviolet;
+      }
+
+      &.inactive {
+        color: transparent;
+      }
+    }
+
+    &__description {
+      text-decoration: dotted;
+    }
+  }
+}
+
+.example-container .mat-form-field+.mat-form-field {
+  margin-left: 8px;
+}

@@ -1,0 +1,54 @@
+<!-- <form>
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput matInputplaceholder="Title" [(ngModel)]="title" [ngModelOptions]="{standalone: true}">
+    <mat-hint *ngIf="">Autofilled!</mat-hint>
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Description</mat-label>
+    <textarea matInput matInputplaceholder="Description" [(ngModel)]="description"
+      [ngModelOptions]="{standalone: true}">
+    </textarea>
+    <mat-hint *ngIf="">Autofilled!</mat-hint>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!title || !description">Add Task</button>
+</form> -->
+
+
+<form class="todo-form" [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <input matInput formControlName="description" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Author</mat-label>
+    <input matInput formControlName="author" />
+    <div *ngIf="todoForm.get('author').invalid && todoForm.get('author').touched">
+      <small *ngIf="todoForm.get('author').errors.required">Can not be blank</small>
+      <small *ngIf="todoForm.get('author').errors.minlength">
+        Minimal length can not be less than
+        {{ todoForm.get("author").errors.minlength.requiredLength }}</small>
+    </div>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Priority</mat-label>
+    <select matNativeControl required formControlName="priority">
+      <option value="Low">Low</option>
+      <option value="Medium">Medium</option>
+      <option value="High">High</option>
+    </select>
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Deadline</mat-label>
+    <input matInput [matDatepicker]="picker" [min]="minDate" formControlName="date" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <button type="submit" mat-raised-button color="primary" [disabled]="todoForm.invalid">
+    Add To Do
+  </button>
+</form>

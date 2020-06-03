@@ -1,0 +1,34 @@
+<!-- 
+<div class="example-container">
+  <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+    <mat-label>Search ToDo</mat-label>
+    <input matInput #input maxlength="10" [(ngModel)]="search" placeholder="Search by {{searchBy}}">
+    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Search By</mat-label>
+    <mat-select [(ngModel)]="searchBy" name="categorySelect">
+      <mat-option *ngFor="let searchBy of searchByTypes;" value={{searchBy}}>{{searchBy}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div> -->
+
+
+    <!-- <ng-container *ngIf="undoneTodo.length > 0; else allDone"> -->
+        <app-todo-list-item
+        [todos] = "todos"
+        (itemToDelete)="deleteToDo($event)"
+        (itemSetDone)="setDoneToDo($event)">
+      </app-todo-list-item>
+    <!-- </ng-container> -->
+
+
+<ng-template #allDone>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <h4>All Done!! 🏖</h4>
+  </div>
+</ng-template>
+
+
+
