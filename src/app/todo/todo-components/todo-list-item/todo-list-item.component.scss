@@ -1,47 +1,3 @@
-// .todo-list {
-//     // display: flex;
-//     // flex-direction: column;
-//     // padding-top: 20px;
-
-//     &-item {
-//         // border: 1px solid #ccc;
-//         position:relative;
-//         margin-bottom: 10px;
-//         padding: 5px;
-//         margin: 20px;
-
-//         &__title {
-//             margin: 10px;
-//             font-weight: bold;
-//             margin-right: 20px;
-
-//             &.active {
-//                 color: blueviolet;
-//             }
-
-//             &.inactive {
-//                 color: transparent;
-//             }
-//         }
-
-//         &__description {
-//             text-decoration: dotted;
-//         }
-
-
-//     }
-// }
-// .actions{
-//     position: absolute;
-//     right: 10px;
-//     top:50%;
-//     transform: translate(0, -50%);
-// }
-
-// button {
-//     margin-left: 20px;
-// }
-
 table {
   width: 100%;
 }
@@ -60,3 +16,33 @@ table {
       height: 400px;
       overflow: auto;
 }
+
+@mixin mat-table-columns($columns) {
+  .mat-column- {
+
+    @each $colName,
+    $props in $columns {
+
+      $width: map-get($props, 'width');
+
+      &#{$colName} {
+        flex: $width;
+        max-width: $width;
+
+        @if map-has-key($props, 'color') {
+          color: map-get($props, 'color');
+        }
+      }
+    }
+  }
+}
+
+@include mat-table-columns((
+
+    title: (width: 6rem, color: gray),
+    description: (width: 12rem),
+    author: (width: 3rem),
+    priority: (width: 3rem),
+    deadline: (width: 5rem),
+    actions: (width: 4rem)
+));

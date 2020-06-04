@@ -42,14 +42,9 @@ export class TodoFormComponent implements OnInit{
 
 
     onSubmit():void {
-         // TODO: apply form control
         if (this.todoForm.valid) {
             console.log('Form', this.todoForm.value);
         }
-        // if( this.title?.trim() && this.description?.trim()){
-        //     this.title = null;
-        //     this.description = null;
-        // }
         this.todoSubmit.emit({ title: this.todoForm.value.title, description: this.todoForm.value.description, id: `${uuidv4()}`, author: this.todoForm.value.author, priority: this.todoForm.value.priority, deadline: this.todoForm.value.date , done:false });
         this.todoForm.reset();
     }

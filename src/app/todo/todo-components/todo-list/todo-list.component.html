@@ -15,13 +15,13 @@
 </div> -->
 
 
-    <!-- <ng-container *ngIf="undoneTodo.length > 0; else allDone"> -->
+    <ng-container *ngIf="undoneTodo.length > 0; else allDone">
         <app-todo-list-item
         [todos] = "todos"
         (itemToDelete)="deleteToDo($event)"
         (itemSetDone)="setDoneToDo($event)">
       </app-todo-list-item>
-    <!-- </ng-container> -->
+    </ng-container>
 
 
 <ng-template #allDone>

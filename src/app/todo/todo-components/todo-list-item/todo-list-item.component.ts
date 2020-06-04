@@ -33,7 +33,7 @@ export class TodoListItemComponent implements OnInit, OnChanges, DoCheck  {
   itemSetDone: EventEmitter<Todo> = new EventEmitter<Todo>();
   
   titleHovered: string;  //keep as example only 
-  displayedColumns: string[] = ['title', 'description', 'author', 'priority', 'deadline', 'done']; /// Anume acest array defineste in ce ordine se vor vizualiza elementele
+  displayedColumns: string[] = ['title', 'description', 'author', 'priority', 'deadline','actions']; /// Anume acest array defineste in ce ordine se vor vizualiza elementele
   dataSource = new MatTableDataSource()
   
   constructor(public dialog: MatDialog) {}
@@ -63,13 +63,6 @@ export class TodoListItemComponent implements OnInit, OnChanges, DoCheck  {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
-  // onItemHover(title: string): void {  // keep as example only 
-  //   this.titleHovered = title;
-
-  // }
-    
-
 
   openDialogEdit(todo: Todo): void {
     const dialogRef = this.dialog.open(TodoListItemEditComponent, {

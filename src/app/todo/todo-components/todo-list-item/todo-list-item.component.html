@@ -1,24 +1,3 @@
-<!-- <li class="todo-list-item" (mouseover)="onItemHover(todo.title)">
-  <span class="todo-list-item__title"
-    [ngClass]="{ 'active': titleHovered === todo.title}">
-    Title: {{ todo.title }}
-  </span>
-  <span class="todo-list-item__description">Description: {{ todo.description }}</span>
-  <section class="actions">
-  <span>
-    <button class="todo-list-item__buttons " mat-raised-button color="primary" (click)="openDialogEdit()">Edit
-    </button>
-  </span>
-  <span>
-    <button class="todo-list-item__buttons " mat-raised-button color="warn" (click)="deleteMe()"> Delete
-    </button>
-  </span>
-  <button mat-mini-fab color="accent" class="" aria-label="Example icon button with a menu icon"
-    (click)="setDone()">
-    <mat-icon>done</mat-icon>
-  </button>
-  </section>
-</li> -->
 <div class="tableContainer">
 
   <mat-form-field>
@@ -31,38 +10,32 @@
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
-    <!-- Position Column -->
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
       <td mat-cell *matCellDef="let todorow"> {{todorow.title}} </td>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="description">
       <th mat-header-cell *matHeaderCellDef> Description </th>
       <td mat-cell *matCellDef="let todorow"> {{todorow.description}} </td>
     </ng-container>
 
-    <!-- Weight Column -->
     <ng-container matColumnDef="author">
       <th mat-header-cell *matHeaderCellDef> Author </th>
       <td mat-cell *matCellDef="let todorow"> {{todorow.author}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
     <ng-container matColumnDef="priority">
       <th mat-header-cell *matHeaderCellDef> Priority </th>
       <td mat-cell *matCellDef="let todorow"> {{todorow.priority}} </td>
     </ng-container>
 
-    <!-- Symbol Deadline -->
     <ng-container matColumnDef="deadline">
       <th mat-header-cell *matHeaderCellDef> Deadline </th>
-      <td mat-cell *matCellDef="let todorow"> {{todorow.deadline}} </td>
+      <td mat-cell *matCellDef="let todorow"> {{todorow.deadline | date: 'short'}} </td>
     </ng-container>
 
-    <!-- Symbol Done -->
-    <ng-container matColumnDef="done">
+    <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let todorow"> 
         <button 
