@@ -25,7 +25,7 @@ export class TodoFormComponent implements OnInit{
         this.todoForm = new FormGroup({
             title: new FormControl(null, [
                 Validators.required,
-                Validators.minLength(3),
+                Validators.minLength(5),
             ]),
             description: new FormControl(null, [
                 Validators.required,
@@ -43,9 +43,8 @@ export class TodoFormComponent implements OnInit{
 
     onSubmit():void {
         if (this.todoForm.valid) {
-            console.log('Form', this.todoForm.value);
+            this.todoSubmit.emit({ title: this.todoForm.value.title, description: this.todoForm.value.description, id: `${uuidv4()}`, author: this.todoForm.value.author, priority: this.todoForm.value.priority, deadline: this.todoForm.value.date , done:false });
+            this.todoForm.reset();
         }
-        this.todoSubmit.emit({ title: this.todoForm.value.title, description: this.todoForm.value.description, id: `${uuidv4()}`, author: this.todoForm.value.author, priority: this.todoForm.value.priority, deadline: this.todoForm.value.date , done:false });
-        this.todoForm.reset();
     }
 }

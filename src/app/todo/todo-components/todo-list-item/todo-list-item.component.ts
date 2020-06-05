@@ -23,10 +23,17 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./todo-list-item.component.scss'],
 })
 export class TodoListItemComponent implements OnInit, OnChanges, DoCheck  {
-  @Input() 
-  todo: Todo;
+   @Input()
+   todo: Todo
+  // @Input()
+  // todos: Todo[]
+
   @Input()
-  todos: Todo[]
+  set todos(todos: Todo[]){
+    this.dataSource = new MatTableDataSource(todos.filter(todo => !todo.done))
+    console.log(this.dataSource)
+  }
+
   @Output()
   itemToDelete: EventEmitter<string> = new EventEmitter<string>();
   @Output()
@@ -35,19 +42,20 @@ export class TodoListItemComponent implements OnInit, OnChanges, DoCheck  {
   titleHovered: string;  //keep as example only 
   displayedColumns: string[] = ['title', 'description', 'author', 'priority', 'deadline','actions']; /// Anume acest array defineste in ce ordine se vor vizualiza elementele
   dataSource = new MatTableDataSource()
-  
+  // undoneTodo: Todo[] // for tests
   constructor(public dialog: MatDialog) {}
   
   ngOnInit(): void {
     this.todos;
-    this.dataSource = new MatTableDataSource(this.todos.filter(todo => !todo.done))
+    // this.undoneTodo = this.todos.filter(todo => !todo.done)  // for tests
   }
 
   ngOnChanges() {
   }
 
   ngDoCheck() {
-    this.dataSource = new MatTableDataSource(this.todos.filter(todo => !todo.done)) // FIXME:Solve the problem with observable
+    // console.log('dataSource for Tabletemplate is updated in ngDocheck lifeCycle [todo-list-item-component]')
+    // this.dataSource = new MatTableDataSource(this.todos.filter(todo => !todo.done)) // FIXME:Solve the problem with observable?
   }
   
   deleteMe(todorow: Todo) {

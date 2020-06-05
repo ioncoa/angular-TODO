@@ -3,12 +3,24 @@
   <mat-form-field>
     <mat-label>Title</mat-label>
     <input matInput formControlName="title" />
+    <div *ngIf="todoForm.get('title').invalid && todoForm.get('title').touched">
+      <small *ngIf="todoForm.get('title').errors.required">Can not be blank</small>
+      <small *ngIf="todoForm.get('title').errors.minlength">
+        Minimal length can not be less than
+        {{ todoForm.get("title").errors.minlength.requiredLength }}</small>
+    </div>
+    <!-- <pre>{{todoForm.errors | json }}</pre> -->
   </mat-form-field>
   <mat-form-field>
     <mat-label>Description</mat-label>
     <textarea matInput matInputplaceholder="Description" formControlName="description">
     </textarea>
-    <mat-hint *ngIf="">Autofilled!</mat-hint>
+    <div *ngIf="todoForm.get('description').invalid && todoForm.get('description').touched">
+      <small *ngIf="todoForm.get('description').errors.required">Can not be blank</small>
+      <small *ngIf="todoForm.get('description').errors.minlength">
+        Minimal length can not be less than
+        {{ todoForm.get("description").errors.minlength.requiredLength }}</small>
+    </div>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Author</mat-label>
