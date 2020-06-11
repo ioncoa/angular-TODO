@@ -27,7 +27,7 @@ export class TodoComponent {
   constructor(private http: HttpClient){}
 
   ngOnInit(): void {
-    this.http.get<Todo[]>('http://localhost:3000/todoList')
+    this.http.get<Todo[]>('https://gentle-reef-67626.herokuapp.com/todoList')
     .subscribe(response => {
       console.log('Response: ', response)
       this.todos = response
@@ -46,7 +46,7 @@ export class TodoComponent {
     });
 
     if (!isTodoAlreadyExists) {
-      this.http.post<Todo>('http://localhost:3000/create', newTodo)
+      this.http.post<Todo>('https://gentle-reef-67626.herokuapp.com/create', newTodo)
       .subscribe( response => {
         this.todos.unshift(response)
       })

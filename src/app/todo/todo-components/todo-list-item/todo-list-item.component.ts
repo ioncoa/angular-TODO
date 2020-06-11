@@ -82,7 +82,7 @@ export class TodoListItemComponent implements OnInit, OnChanges, DoCheck  {
       let obj = this.todos.find(obj => obj.id === todo.id);
       console.log('todooo: ',todo)
       if (result) {
-        this.http.post(`http://localhost:3000/edit/${obj.id}`, {title: result.title, description: result.description})
+        this.http.post(`https://gentle-reef-67626.herokuapp.com/edit/${obj.id}`, {title: result.title, description: result.description})
         .subscribe(
           response => {
             console.log('On Edit Todo, result :',response)

@@ -33,7 +33,7 @@ export class TodoListComponent implements OnInit, DoCheck {
     }
     
     setDoneToDo(todo:Todo){
-      this.http.post(`http://localhost:3000/complete/${todo.id}`,{})
+      this.http.post(`https://gentle-reef-67626.herokuapp.com/complete/${todo.id}`,{})
       .subscribe( response =>{
         console.log('On Set Done , result :', response)
         if(this.todos.indexOf(todo) !== -1) {
@@ -49,7 +49,7 @@ export class TodoListComponent implements OnInit, DoCheck {
     }
     
     deleteToDo(id: string) {
-      this.http.delete(`http://localhost:3000/todos/${id}`)
+      this.http.delete(`https://gentle-reef-67626.herokuapp.com/todos/${id}`)
       .subscribe( response => {
         console.log('On delete , result : ',response)
         this.todos = this.todos.filter( todo => todo.id !== id)
