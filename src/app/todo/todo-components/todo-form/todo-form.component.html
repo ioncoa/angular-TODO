@@ -24,7 +24,7 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Author</mat-label>
-    <input matInput formControlName="author" />
+    <input matInput formControlName="author"  />
     <div *ngIf="todoForm.get('author').invalid && todoForm.get('author').touched">
       <small *ngIf="todoForm.get('author').errors.required">Can not be blank</small>
       <small *ngIf="todoForm.get('author').errors.minlength">

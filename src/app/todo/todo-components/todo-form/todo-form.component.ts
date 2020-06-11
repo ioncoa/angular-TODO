@@ -16,9 +16,9 @@ export class TodoFormComponent implements OnInit{
 
     @Output() todoSubmit = new EventEmitter<Todo>();
 
+    todoForm: FormGroup;
     title: string='';
     description: string='';
-    todoForm: FormGroup;
     minDate = new Date();
 
     ngOnInit(): void {
@@ -43,7 +43,7 @@ export class TodoFormComponent implements OnInit{
 
     onSubmit():void {
         if (this.todoForm.valid) {
-            this.todoSubmit.emit({ title: this.todoForm.value.title, description: this.todoForm.value.description, id: `${uuidv4()}`, author: this.todoForm.value.author, priority: this.todoForm.value.priority, deadline: this.todoForm.value.date , done:false });
+            this.todoSubmit.emit({ title: this.todoForm.value.title, description: this.todoForm.value.description, id: `${uuidv4()}`, author: this.todoForm.value.author , priority: this.todoForm.value.priority, deadline: this.todoForm.value.date , done:false });
             this.todoForm.reset();
         }
     }

@@ -16,6 +16,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core'
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HelloWorldComponent } from './hello-world/hello-world.component';
@@ -64,6 +65,7 @@ import { TodoDoneComponent } from './todo/todo-components/todo-done/todo-done.co
     ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    HttpClientModule,
 
 
   ],

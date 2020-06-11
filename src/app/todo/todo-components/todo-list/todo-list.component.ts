@@ -1,5 +1,6 @@
 import { Component,  Input, OnInit, DoCheck} from '@angular/core';
 import  {Todo} from '../../todo.component'
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class TodoListComponent implements OnInit, DoCheck {
   searchByTypes: string[] = ['Title', 'Description']
   searchBy: string = this.searchByTypes[0];
   
-  
+  constructor(private http: HttpClient){}
+
   ngOnInit(): void {  
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
@@ -31,18 +33,30 @@ export class TodoListComponent implements OnInit, DoCheck {
     }
     
     setDoneToDo(todo:Todo){
-      if(this.todos.indexOf(todo) !== -1) {
-        this.todos[this.todos.indexOf(todo)].done= true;
-        this.undoneTodo = this.todos.filter(todo => !todo.done);   // 2nd time: Call here, and every time when we set it DONE
-        
+      this.http.post(`http://localhost:3000/complete/${todo.id}`,{})
+      .subscribe( response =>{
+        console.log('On Set Done , result :', response)
+        if(this.todos.indexOf(todo) !== -1) {
+          this.todos[this.todos.indexOf(todo)].done= true;
+          this.undoneTodo = this.todos.filter(todo => !todo.done);   // 2nd time: Call here, and every time when we set it DONE
+        }
+      },
+      err => {
+        alert('Something wrong Happened, please see console log')
+        console.log('On Set Done, HTTP Error: ',err)
       }
-      
+      )
     }
     
     deleteToDo(id: string) {
-      let obj = this.todos.find(obj => obj.id === id);
-      if (this.todos.indexOf(obj) !== -1) {
-        this.todos.splice(this.todos.indexOf(obj), 1);
-      }
+      this.http.delete(`http://localhost:3000/todos/${id}`)
+      .subscribe( response => {
+        console.log('On delete , result : ',response)
+        this.todos = this.todos.filter( todo => todo.id !== id)
+        },
+        err => {
+          alert('Something wrong Happened, please see console log')
+          console.log('On Set Done, HTTP Error: ', err)
+      })
     }
   }

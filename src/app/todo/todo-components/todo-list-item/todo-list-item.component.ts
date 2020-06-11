@@ -15,6 +15,7 @@ import {
   MAT_DIALOG_DATA
 } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -25,29 +26,24 @@ import { MatTableDataSource } from '@angular/material/table';
 export class TodoListItemComponent implements OnInit, OnChanges, DoCheck  {
    @Input()
    todo: Todo
-  // @Input()
-  // todos: Todo[]
-
   @Input()
-  set todos(todos: Todo[]){
-    this.dataSource = new MatTableDataSource(todos.filter(todo => !todo.done))
-    console.log(this.dataSource)
-  }
+  todos: Todo[]
+
+
 
   @Output()
   itemToDelete: EventEmitter<string> = new EventEmitter<string>();
   @Output()
   itemSetDone: EventEmitter<Todo> = new EventEmitter<Todo>();
   
-  titleHovered: string;  //keep as example only 
   displayedColumns: string[] = ['title', 'description', 'author', 'priority', 'deadline','actions']; /// Anume acest array defineste in ce ordine se vor vizualiza elementele
   dataSource = new MatTableDataSource()
-  // undoneTodo: Todo[] // for tests
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog , private http: HttpClient) {}
   
   ngOnInit(): void {
     this.todos;
-    // this.undoneTodo = this.todos.filter(todo => !todo.done)  // for tests
+    this.dataSource = new MatTableDataSource(this.todos.filter(todo => !todo.done))
+    console.log('todosa  aa: ',this.todos)
   }
 
   ngOnChanges() {
@@ -59,7 +55,6 @@ export class TodoListItemComponent implements OnInit, OnChanges, DoCheck  {
   }
   
   deleteMe(todorow: Todo) {
-    console.log('deleteMe : ', todorow, typeof todorow);
     this.itemToDelete.emit(todorow.id);
   }
 
@@ -84,9 +79,20 @@ export class TodoListItemComponent implements OnInit, OnChanges, DoCheck  {
 
     dialogRef.afterClosed().subscribe((result) => {
       let obj = this.todos.find(obj => obj.id === todo.id);
+      console.log('todooo: ',todo)
       if (result) {
-        this.todos[this.todos.indexOf(obj)].title = result.title
-        this.todos[this.todos.indexOf(obj)].description = result.description
+        this.http.post(`http://localhost:3000/edit/${obj.id}`, {title: result.title, description: result.description})
+        .subscribe(
+          response => {
+            console.log('On Edit Todo, result :',response)
+            this.todos[this.todos.indexOf(obj)].title = result.title
+            this.todos[this.todos.indexOf(obj)].description = result.description
+          },
+          err => {
+            alert('Something wrong Happened, please see console log')
+            console.log('On Edit todo, HTTP Error: ', err)
+          }
+         )
       }
     });
   }
