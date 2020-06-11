@@ -45,11 +45,12 @@ export class TodoListItemComponent implements OnInit, OnChanges, DoCheck  {
     this.dataSource = new MatTableDataSource(this.todos.filter(todo => !todo.done))
     console.log('todosa  aa: ',this.todos)
   }
-
+  
   ngOnChanges() {
   }
-
+  
   ngDoCheck() {
+    this.dataSource = new MatTableDataSource(this.todos.filter(todo => !todo.done))
     // console.log('dataSource for Tabletemplate is updated in ngDocheck lifeCycle [todo-list-item-component]')
     // this.dataSource = new MatTableDataSource(this.todos.filter(todo => !todo.done)) // FIXME:Solve the problem with observable?
   }
